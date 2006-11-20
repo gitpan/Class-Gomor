@@ -1,15 +1,16 @@
 #
-# $Id: Hash.pm,v 1.4 2006/04/26 21:21:09 gomor Exp $
+# $Id: Hash.pm,v 1.5 2006/11/20 18:38:57 gomor Exp $
 #
-
 package Class::Gomor::Hash;
 use strict;
 use warnings;
 
-our $VERSION = '1.00';
+our $VERSION = '1.01';
 
 require Class::Gomor;
 our @ISA = qw(Class::Gomor);
+
+use Data::Dumper;
 
 sub new {
    my $self = shift;
@@ -39,6 +40,8 @@ sub cgFullClone {
    }
    bless(\%new, $class);
 }
+
+sub cgDumper { Dumper(shift()) }
 
 sub _cgAccessorScalar {
    my ($self, $sca) = (shift, shift);
@@ -163,7 +166,15 @@ This method is the same as B<cgClone>, but will clone all attributes recursively
 
 Another thing to note, there is no catch for cycling references (when you link two objects with each others). You have been warned.
 
+=item B<cgDumper>
+
+Will return a string as with B<Data::Dumper> Dumper method. This is less useful for hashref objects, because they already include attributes names.
+
 =back
+
+=head1 SEE ALSO
+
+L<Class::Gomor>
 
 =head1 AUTHOR
       

@@ -1,15 +1,16 @@
 #
-# $Id: Array.pm,v 1.4 2006/04/26 21:20:48 gomor Exp $
+# $Id: Array.pm,v 1.5 2006/11/20 18:38:20 gomor Exp $
 #
-
 package Class::Gomor::Array;
 use strict;
 use warnings;
 
-our $VERSION = '1.00';
+our $VERSION = '1.01';
 
 require Class::Gomor;
 our @ISA = qw(Class::Gomor);
+
+use Data::Dumper;
 
 no strict 'refs';
 
@@ -48,6 +49,14 @@ sub cgFullClone {
          : push @new, $_;
    }
    bless(\@new, $class);
+}
+
+sub cgDumper {
+   my $self = shift;
+   my $class = ref($self) || $self;
+   my %h = map { $_ => $self->[$self->cgGetIndice($_)] }
+      @{$class->cgGetAttributes};
+   Dumper(\%h);
 }
 
 sub _cgAccessorScalar {
@@ -177,7 +186,15 @@ This method is the same as B<cgClone>, but will clone all attributes recursively
 
 Another thing to note, there is no catch for cycling references (when you link two objects with each others). You have been warned.
 
+=item B<cgDumper>
+
+Will return a string as with B<Data::Dumper> Dumper method. This is useful for debugging purposes, because an arrayref object does not include attributes names.
+
 =back
+
+=head1 SEE ALSO
+
+L<Class::Gomor>
 
 =head1 AUTHOR
       

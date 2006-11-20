@@ -1,12 +1,11 @@
 #
-# $Id: Gomor.pm,v 1.3 2006/04/26 21:19:54 gomor Exp $
+# $Id: Gomor.pm,v 1.4 2006/11/20 18:35:17 gomor Exp $
 #
-
 package Class::Gomor;
 use strict;
 use warnings;
 
-our $VERSION = '1.00';
+our $VERSION = '1.01';
 
 require Exporter;
 our @ISA = qw(Exporter);
@@ -108,7 +107,7 @@ sub cgDebugPrint {
 
 =head1 NAME
 
-Class::Gomor - another class and object builder, base class only
+Class::Gomor - another class and object builder
 
 =head1 DESCRIPTION
 
@@ -172,11 +171,25 @@ Accessor creation method. Takes an array reference containing all array attribut
 
 __PACKAGE__->cgBuildAccessorsArray(\@AA);
 
+=item B<cgClone> [ (scalar) ]
+
+You can clone one of your objects by calling this method. An optional parameter may be used to create multiple clones. Cloning will occure only on the first level attributes, that is, if you have attributes containing other objects, they will not be cloned.
+
+=item B<cgFullClone> [ (scalar) ]
+
+This method is the same as B<cgClone>, but will clone all attributes recursively, but only if they are subclassed from B<Class::Gomor>. So, objects created with other modules than B<Class::Gomor::Array> or B<Class::Gomor::Hash> will not be cloned.
+
+Another thing to note, there is no catch for cycling references (when you link two objects with each others). You have been warned.
+
 =item B<cgDebugPrint> (scalar, scalar)
 
 First argument is a debug level. It is compared with global B<$Debug>, and if it is less than it, the second argument (a message string) is displayed. This method exists because I use it, maybe you will not like it.
 
 =back
+
+=head1 SEE ALSO
+
+L<Class::Gomor::Array>, L<Class::Gomor::Hash>
 
 =head1 AUTHOR
       
