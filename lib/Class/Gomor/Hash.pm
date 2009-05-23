@@ -1,14 +1,13 @@
 #
-# $Id: Hash.pm,v 1.5 2006/11/20 18:38:57 gomor Exp $
+# $Id: Hash.pm 1633 2009-05-23 13:30:33Z gomor $
 #
 package Class::Gomor::Hash;
-use strict;
-use warnings;
+use strict; use warnings;
 
-our $VERSION = '1.01';
+our $VERSION = '1.02';
 
-require Class::Gomor;
-our @ISA = qw(Class::Gomor);
+use Class::Gomor;
+use base qw(Class::Gomor);
 
 use Data::Dumper;
 
@@ -182,7 +181,7 @@ Patrice E<lt>GomoRE<gt> Auffret
       
 =head1 COPYRIGHT AND LICENSE
   
-Copyright (c) 2004-2006, Patrice E<lt>GomoRE<gt> Auffret
+Copyright (c) 2004-2009, Patrice E<lt>GomoRE<gt> Auffret
 
 You may distribute this module under the terms of the Artistic license.
 See LICENSE.Artistic file in the source distribution archive.

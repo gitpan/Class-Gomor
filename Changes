@@ -1,5 +1,10 @@
 Revision history for Perl extension Class::Gomor.
 
+1.02 Sat May 23 15:44:40 CEST 2009
+   - bugfix: a warning when used with perl 5.10
+   - new: test kwalitee
+   - update: copyright notice
+
 1.01 Mon Nov 20 18:40:40 CET 2006
    - Class::Gomor::Hash:  new: cgDumper()
    - Class::Gomor::Array: new: cgDumper()

@@ -1,14 +1,13 @@
 #
-# $Id: Gomor.pm,v 1.4 2006/11/20 18:35:17 gomor Exp $
+# $Id: Gomor.pm 1633 2009-05-23 13:30:33Z gomor $
 #
 package Class::Gomor;
-use strict;
-use warnings;
+use strict; use warnings;
 
-our $VERSION = '1.01';
+our $VERSION = '1.02';
 
-require Exporter;
-our @ISA = qw(Exporter);
+use Exporter;
+use base qw(Exporter);
 
 use Carp;
 
@@ -53,10 +52,15 @@ sub cgGetAttributes {
    my $classes = [ $self ];
    $self->cgGetIsaTree($classes);
    my @attributes = ();
-   for (@$classes) {
-      push @attributes, @{$_.'::AS'} if @{$_.'::AS'};
-      push @attributes, @{$_.'::AA'} if @{$_.'::AA'};
-      push @attributes, @{$_.'::AO'} if @{$_.'::AO'};
+   {
+      # On perl 5.10.0, we have a warning message:
+      # "::AS" used only once: possible typo ...
+      no warnings;
+      for (@$classes) {
+         push @attributes, @{$_.'::AS'} if @{$_.'::AS'};
+         push @attributes, @{$_.'::AA'} if @{$_.'::AA'};
+         push @attributes, @{$_.'::AO'} if @{$_.'::AO'};
+      }
    }
    \@attributes;
 }
@@ -197,7 +201,7 @@ Patrice E<lt>GomoRE<gt> Auffret
       
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (c) 2004-2006, Patrice E<lt>GomoRE<gt> Auffret
+Copyright (c) 2004-2009, Patrice E<lt>GomoRE<gt> Auffret
 
 You may distribute this module under the terms of the Artistic license.
 See LICENSE.Artistic file in the source distribution archive.
